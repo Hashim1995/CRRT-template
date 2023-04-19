@@ -5,7 +5,6 @@ const checkPermission = (permissions: string[]): boolean => {
     'view_about_page',
     'view_services_page'
   ];
-  console.log(permissions.some(p => userPermissions.includes(p)));
   return permissions.some(p => userPermissions.includes(p));
 };
 export default checkPermission;

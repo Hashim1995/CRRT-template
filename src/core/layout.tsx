@@ -1,26 +1,27 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem } from '@chakra-ui/react';
 // import { AnimatePresence, motion } from "framer-motion";
 // import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import Sidebar from "@core/sidebar/sidebar";
+import { Outlet } from 'react-router-dom';
+import Sidebar from '@core/sidebar/sidebar';
 
 function Layout() {
-    // const [isOpen, setIsOpen] = useState<boolean>(true);
+  // const [isOpen, setIsOpen] = useState<boolean>(true);
 
-    return <Grid
-        templateAreas={`"header header"
+  return (
+    <Grid
+      templateAreas={`"header header"
                   "nav main"
                   "nav footer"`}
-        gridTemplateRows="2fr 85vh 2fr"
-        gridTemplateColumns="1fr 4fr"
-        gap='1'
-        color='blackAlpha.700'
-        fontWeight='bold'
+      gridTemplateRows="2fr 85vh 2fr"
+      gridTemplateColumns="1fr 4fr"
+      gap="1"
+      color="blackAlpha.700"
+      fontWeight="bold"
     >
-        <GridItem p='2' bg='orange.300' area="header">
-            Header
-        </GridItem>
-        {/* <Flex>
+      <GridItem p="2" bg="orange.300" area="header">
+        Header
+      </GridItem>
+      {/* <Flex>
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -44,17 +45,17 @@ function Layout() {
 
 
         </Flex> */}
-        <GridItem area="nav">
-            <Sidebar />
-
-        </GridItem>
-        <GridItem p='2' bg='green.300' area="main">
-            <Outlet />
-        </GridItem>
-        <GridItem p='2' bg='blue.300' area="footer">
-            Footer
-        </GridItem>
+      <GridItem area="nav">
+        <Sidebar />
+      </GridItem>
+      <GridItem p="2" bg="green.300" area="main">
+        <Outlet />
+      </GridItem>
+      <GridItem p="2" bg="blue.300" area="footer">
+        Footer
+      </GridItem>
     </Grid>
+  );
 }
 
 export default Layout;
