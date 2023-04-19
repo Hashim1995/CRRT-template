@@ -14,6 +14,7 @@
   },
 
   "extends": ["airbnb", "prettier"],
+  "ignorePatterns": ["src/stories/*"],
   "plugins": ["react", "prettier"],
   "rules": {
     "prettier/prettier": "off",
