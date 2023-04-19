@@ -18,15 +18,8 @@
   "rules": {
     "prettier/prettier": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-    "import/prefer-default-export": "off",
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": "off",
-    "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "import/no-extraneous-dependencies": "off",
-    "react/require-default-props": "warn",
-    "no-console": "off",
-    "guard-for-in": "off",
     "import/extensions": "off"
   },
   "settings": {

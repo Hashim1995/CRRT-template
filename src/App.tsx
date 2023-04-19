@@ -6,8 +6,6 @@ import routesList from '@core/routes';
 function App() {
   const router = useRoutes(routesList);
 
-  const a = 1
-
   return <Suspense fallback={<Spinner />}>{router}</Suspense>;
 }
 

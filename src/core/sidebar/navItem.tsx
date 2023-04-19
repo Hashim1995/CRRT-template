@@ -9,19 +9,11 @@ interface Props {
   Icon?: IconType;
 
   title: string;
-  description?: string;
   navSize: string;
   active?: boolean;
   url: string;
 }
-export default function NavItem({
-  Icon,
-  url,
-  title,
-  description,
-  active,
-  navSize
-}: Props) {
+export default function NavItem({ Icon, url, title, active, navSize }: Props) {
   return (
     <Flex
       mt={30}
@@ -54,5 +46,6 @@ export default function NavItem({
 }
 
 NavItem.defaultProps = {
-  Icon: <FaRegFolder />
+  Icon: <FaRegFolder />,
+  active: false
 };
