@@ -1,12 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Input from '@/components/Input';
 import { ChakraProvider } from '@chakra-ui/react';
+import globalTheme from '@/configs/globalTheme';
 const meta = {
-  title: 'Input',
+  title: 'Example/Input',
   component: Input,
   decorators: [
     Story => (
-      <ChakraProvider>
+      <ChakraProvider theme={globalTheme}>
         <Story />
       </ChakraProvider>
     )
