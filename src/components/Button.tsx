@@ -18,6 +18,7 @@ interface ButtonProps {
    * Button contents
    */
   label: string;
+  disabled?: boolean;
   /**
    * Optional click handler
    */
@@ -27,22 +28,28 @@ interface ButtonProps {
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
+export default function Button({
   primary = false,
   size = 'medium',
+  disabled,
   backgroundColor,
   label,
   ...props
-}: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+}: ButtonProps) {
+  const mode = primary
+    ? 'storybook-button--primary'
+    : 'storybook-button--secondary';
   return (
     <button
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      disabled={disabled}
+      className={['storybook-button', `storybook-button--${size}`, mode].join(
+        ' '
+      )}
       style={{ backgroundColor }}
       {...props}
     >
       {label}
     </button>
   );
-};
+}
