@@ -5,7 +5,7 @@ export default {
     full: '100%',
     '3xs': '14rem',
     '2xs': '16rem',
-    xs: '20rem',
+    xs: '230px',
     sm: '24rem',
     md: '28rem',
     lg: '32rem',

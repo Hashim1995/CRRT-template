@@ -8,6 +8,8 @@ import typography from './style/typography';
 import zIndex from './style/z-index';
 
 const overrides = {
+  initialColorMode: 'light',
+  useSystemColorMode: false,
   ...colors,
   ...breakpoints,
   ...borderRadius,

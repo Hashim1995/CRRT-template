@@ -5,9 +5,9 @@ export default {
       2: 'yellow'
     },
     black_1: '#333333',
-    gray_1: '#717171',
+    gray_1: 'red',
     gray: {
-      200: 'green'
+      200: 'purple'
     }
   }
 };
