@@ -2,9 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import eslint from 'vite-plugin-eslint';
 import path from 'path';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
-  plugins: [react(), eslint({ fix: false, include: ['src/**/*.tsx'] })],
+  plugins: [react(), svgr(), eslint({ fix: false, include: ['src/**/*.tsx'] })],
   server: {
     watch: {
       usePolling: true

@@ -14,9 +14,11 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "jsx": "preserve",
+
     "baseUrl": ".",
     "isolatedModules": true,
     "noEmit": true,
+    "types": ["vite-plugin-svgr/client"],
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["src/*"],
@@ -29,6 +31,7 @@
       "@views/*": ["src/views/*"]
     }
   },
+
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

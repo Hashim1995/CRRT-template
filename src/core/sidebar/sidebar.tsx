@@ -1,7 +1,6 @@
 import {
   useColorModeValue,
   Box,
-  Text,
   Flex,
   CloseButton,
   BoxProps,
@@ -17,23 +16,28 @@ import {
   FiArrowRightCircle,
   FiArrowLeftCircle
 } from 'react-icons/fi';
-import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from 'usehooks-ts';
+import { ReactComponent as Logo } from '@assets/logo/logoOptima2019-01.svg';
+
+import SvgWrapper from '@/components/display/svg-wrapper/svg-wrapper';
 import NavItem from './navbar-item/navbar-item';
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
+  isOpen?: boolean;
 }
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  url: string;
 }
-function Sidebar({ onClose, ...rest }: SidebarProps) {
+function Sidebar({ onClose, isOpen, ...rest }: SidebarProps) {
   const LinkItems: Array<LinkItemProps> = [
-    { name: 'Home', icon: FiHome },
-    { name: 'Trending', icon: FiTrendingUp },
-    { name: 'Explore', icon: FiCompass },
-    { name: 'Favourites', icon: FiStar },
-    { name: 'Settings', icon: FiSettings }
+    { name: 'Home', icon: FiHome, url: '/' },
+    { name: 'Trending', icon: FiTrendingUp, url: '/about' },
+    { name: 'Explore', icon: FiCompass, url: 'about' },
+    { name: 'Favourites', icon: FiStar, url: 'about' },
+    { name: 'Settings', icon: FiSettings, url: 'about' }
   ];
 
   // eslint-disable-next-line no-unused-vars
@@ -42,7 +46,6 @@ function Sidebar({ onClose, ...rest }: SidebarProps) {
     false
   );
 
-  const menuCollapsed = useReadLocalStorage('menuCollapsed');
   const handleToggleCollapse = () => {
     setIsMenuCollapsed(prevValue => !prevValue);
   };
@@ -53,22 +56,21 @@ function Sidebar({ onClose, ...rest }: SidebarProps) {
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-      w={{ base: 'none', md: menuCollapsed ? '80px' : '240px' }}
-      pos="fixed"
+      w={{ base: '100%', md: isMenuCollapsed ? '80px' : '240px' }}
       overflow="hidden"
       h="full"
       {...rest}
     >
       <Flex
         position="relative"
-        h="20"
         alignItems="center"
-        mx="8"
-        justifyContent="space-between"
+        justifyContent={isOpen ? 'space-between' : 'center'}
+        p={2}
       >
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+        {' '}
+        <SvgWrapper height="70px" width="70px">
+          <Logo />
+        </SvgWrapper>
         <IconButton
           className="collapseBtn"
           variant="outline"
@@ -79,20 +81,23 @@ function Sidebar({ onClose, ...rest }: SidebarProps) {
           transition=".4s ease"
           fontSize="20px"
           display={{ base: 'none', md: 'flex' }}
-          icon={menuCollapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
+          icon={
+            isMenuCollapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />
+          }
           position="fixed"
           top="6%"
-          left={menuCollapsed ? '60px' : '220px'}
+          left={isMenuCollapsed ? '60px' : '220px'}
           zIndex="999"
         />
-
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map(link => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
-      ))}
+      <Flex position="relative" alignItems="flex-start" flexDirection="column">
+        {LinkItems.map(link => (
+          <NavItem url={link.url} key={link.name} icon={link.icon}>
+            {link.name}
+          </NavItem>
+        ))}
+      </Flex>
     </Box>
   );
 }
