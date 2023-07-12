@@ -26,7 +26,7 @@ export default function Layout() {
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <Flex minH="100vh">
-        <Box position="fixed" height="100vh" zIndex={99} bg="blue">
+        <Box position="fixed" height="100vh" zIndex={99}>
           <Sidebar
             onClose={onClose}
             width={{ base: '240px', md: sidebarWidth }}
@@ -62,8 +62,7 @@ export default function Layout() {
             borderRadius={6}
             as="header"
             position="sticky"
-            backgroundColor="rgba(255, 
-   255, 255, 0.8)"
+            bg={useColorModeValue('whiteAlpha.200', 'gray.600')}
             justifyContent="flex-end"
             right={0}
             top={0}

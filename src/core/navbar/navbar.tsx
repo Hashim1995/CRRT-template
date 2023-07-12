@@ -1,3 +1,4 @@
+import SwitchIcon from '@/components/display/switch-icon/switch-icon';
 import {
   FlexProps,
   Box,
@@ -12,7 +13,8 @@ import {
   VStack,
   MenuList,
   MenuItem,
-  MenuDivider
+  MenuDivider,
+  useColorMode
 } from '@chakra-ui/react';
 import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi';
 
@@ -20,6 +22,7 @@ interface NavbarProps extends FlexProps {
   onOpen: () => void;
 }
 function Navbar({ onOpen, ...rest }: NavbarProps) {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
       px={{ base: 4, md: 4 }}
@@ -45,6 +48,14 @@ function Navbar({ onOpen, ...rest }: NavbarProps) {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
+        <SwitchIcon
+          onChange={toggleColorMode}
+          status={colorMode === 'light'}
+          size="lg"
+        />
+        {/* <Button onClick={toggleColorMode}>
+          Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+        </Button> */}
         <IconButton size="md" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems="center">
           <Menu>
