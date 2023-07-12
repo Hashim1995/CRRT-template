@@ -15,12 +15,19 @@ export default function Layout() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMenuCollapsed] = useLocalStorage('menuCollapsed', false);
 
+  const marginMd = !isOpen ? '0px' : '240px';
+  const marginCollapsedMd = !isOpen ? '0px' : '80px';
+
   const sidebarWidth = isMenuCollapsed ? '80px' : '240px';
-  const contentMarginLeft = isMenuCollapsed ? '80px' : '240px';
+  const contentMarginLeft = isMenuCollapsed ? marginCollapsedMd : marginMd;
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <Sidebar onClose={onClose} width={sidebarWidth} />
+      <Sidebar
+        onClose={onClose}
+        width={{ base: '0', md: sidebarWidth }}
+        display={{ base: 'none', md: 'block' }}
+      />
       <Drawer
         autoFocus={false}
         isOpen={isOpen}
@@ -31,12 +38,13 @@ export default function Layout() {
         size="full"
       >
         <DrawerContent>
-          <Sidebar onClose={onClose} width={sidebarWidth} />
+          <Sidebar onClose={onClose} />
         </DrawerContent>
       </Drawer>
       <Box ml={contentMarginLeft} transition=".4s ease">
         <Navbar onOpen={onOpen} />
-
+      </Box>
+      <Box ml={contentMarginLeft} transition=".4s ease">
         <Flex
           px={4}
           height="calc(100vh - 56px)"

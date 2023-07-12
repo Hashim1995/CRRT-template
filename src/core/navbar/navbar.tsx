@@ -14,7 +14,7 @@ import {
   MenuItem,
   MenuDivider
 } from '@chakra-ui/react';
-import { FiBell, FiChevronDown } from 'react-icons/fi';
+import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi';
 
 interface NavbarProps extends FlexProps {
   onOpen: () => void;
@@ -31,6 +31,13 @@ function Navbar({ onOpen, ...rest }: NavbarProps) {
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}
     >
+      <IconButton
+        display={{ base: 'flex', md: 'none' }}
+        onClick={onOpen}
+        variant="outline"
+        aria-label="open menu"
+        icon={<FiMenu />}
+      />
       <Text
         display={{ base: 'flex', md: 'none' }}
         fontSize="2xl"
@@ -41,12 +48,7 @@ function Navbar({ onOpen, ...rest }: NavbarProps) {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
-        />
+        <IconButton size="lg" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems="center">
           <Menu>
             <MenuButton

@@ -53,7 +53,7 @@ function Sidebar({ onClose, ...rest }: SidebarProps) {
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-      w={menuCollapsed ? 240 : 30}
+      w={{ base: 'none', md: menuCollapsed ? '80px' : '240px' }}
       pos="fixed"
       overflow="hidden"
       h="full"
@@ -78,6 +78,7 @@ function Sidebar({ onClose, ...rest }: SidebarProps) {
           onClick={handleToggleCollapse}
           transition=".4s ease"
           fontSize="20px"
+          display={{ base: 'none', md: 'flex' }}
           icon={menuCollapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
           position="fixed"
           top="6%"
