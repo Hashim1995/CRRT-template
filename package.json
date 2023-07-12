@@ -28,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-icons": "4.8.0",
     "react-router-dom": "6.10.0",
+    "usehooks-ts": "^2.9.1",
     "vite-plugin-eslint": "1.8.1"
   },
   "devDependencies": {
@@ -41,9 +42,9 @@
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "latest",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "latest",
+    "eslint-plugin-prettier": "latest",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "latest",
     "husky": "8.0.0",

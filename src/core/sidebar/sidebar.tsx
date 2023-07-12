@@ -1,53 +1,99 @@
-import React, { useState } from 'react';
-import { Flex, Button } from '@chakra-ui/react';
+import {
+  useColorModeValue,
+  Box,
+  Text,
+  Flex,
+  CloseButton,
+  BoxProps,
+  IconButton
+} from '@chakra-ui/react';
+import { IconType } from 'react-icons';
+import {
+  FiHome,
+  FiTrendingUp,
+  FiCompass,
+  FiStar,
+  FiSettings,
+  FiArrowRightCircle,
+  FiArrowLeftCircle
+} from 'react-icons/fi';
+import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
+import NavItem from './navbar-item/navbar-item';
 
-import { FaGitter } from 'react-icons/fa';
-import NavItem from '@core/sidebar/navItem';
+interface SidebarProps extends BoxProps {
+  onClose: () => void;
+}
+interface LinkItemProps {
+  name: string;
+  icon: IconType;
+}
+function Sidebar({ onClose, ...rest }: SidebarProps) {
+  const LinkItems: Array<LinkItemProps> = [
+    { name: 'Home', icon: FiHome },
+    { name: 'Trending', icon: FiTrendingUp },
+    { name: 'Explore', icon: FiCompass },
+    { name: 'Favourites', icon: FiStar },
+    { name: 'Settings', icon: FiSettings }
+  ];
 
-export default function Sidebar() {
-  const [navSize, changeNavSize] = useState('large');
+  // eslint-disable-next-line no-unused-vars
+  const [isMenuCollapsed, setIsMenuCollapsed] = useLocalStorage(
+    'menuCollapsed',
+    false
+  );
+
+  const menuCollapsed = useReadLocalStorage('menuCollapsed');
+  const handleToggleCollapse = () => {
+    setIsMenuCollapsed(prevValue => !prevValue);
+  };
+
   return (
-    <Flex
-      pos="sticky"
-      left="5"
-      h="95vh"
-      marginTop="2.5vh"
-      boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-      borderRadius={navSize === 'small' ? '15px' : '30px'}
-      w={navSize === 'small' ? '75px' : '200px'}
-      flexDir="column"
-      justifyContent="space-between"
+    <Box
+      transition=".4s ease"
+      bg={useColorModeValue('white', 'gray.900')}
+      borderRight="1px"
+      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+      w={menuCollapsed ? 240 : 30}
+      pos="fixed"
+      overflow="hidden"
+      h="full"
+      {...rest}
     >
       <Flex
-        p="5%"
-        flexDir="column"
-        w="100%"
-        alignItems={navSize === 'small' ? 'center' : 'flex-start'}
-        as="nav"
+        position="relative"
+        h="20"
+        alignItems="center"
+        mx="8"
+        justifyContent="space-between"
       >
-        <Button
-          colorScheme="blue"
-          onClick={() => {
-            if (navSize === 'small') changeNavSize('large');
-            else changeNavSize('small');
-          }}
-        >
-          Button
-        </Button>
-
-        <NavItem
-          url="/"
-          navSize={navSize}
-          Icon={FaGitter}
-          title="Main"
-          active
+        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+          Logo
+        </Text>
+        <IconButton
+          className="collapseBtn"
+          variant="outline"
+          colorScheme="teal"
+          borderRadius="circle"
+          aria-label="Collapse Menu"
+          onClick={handleToggleCollapse}
+          transition=".4s ease"
+          fontSize="20px"
+          icon={menuCollapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
+          position="fixed"
+          top="6%"
+          left={menuCollapsed ? '60px' : '220px'}
+          zIndex="999"
         />
-        <NavItem url="/about" navSize={navSize} Icon={FaGitter} title="About" />
-        <NavItem url="/info" navSize={navSize} Icon={FaGitter} title="Info" />
-        <NavItem url="/about/1" navSize={navSize} Icon={FaGitter} title="1" />
-        <NavItem url="/about/2" navSize={navSize} Icon={FaGitter} title="2" />
-        <NavItem url="/users" navSize={navSize} Icon={FaGitter} title="Users" />
+
+        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-    </Flex>
+      {LinkItems.map(link => (
+        <NavItem key={link.name} icon={link.icon}>
+          {link.name}
+        </NavItem>
+      ))}
+    </Box>
   );
 }
+
+export default Sidebar;
