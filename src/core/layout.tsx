@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Box,
   useColorModeValue,
@@ -8,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
+import { top } from '@popperjs/core/lib/enums';
 import Navbar from './navbar/navbar';
 import Sidebar from './sidebar/sidebar';
 
@@ -16,19 +18,15 @@ export default function Layout() {
   const [isMenuCollapsed] = useLocalStorage('menuCollapsed', false);
 
   const marginMd = !isOpen ? '0px' : '240px';
-  const marginCollapsedMd = !isOpen ? '0px' : '80px';
+  const marginCollapsedMd = !isOpen ? '0px' : '300px';
 
   const sidebarWidth = isMenuCollapsed ? '80px' : '240px';
   const contentMarginLeft = isMenuCollapsed ? marginCollapsedMd : marginMd;
 
   return (
-    <Box
-      overflow="hidden"
-      minH="100vh"
-      bg={useColorModeValue('gray.100', 'gray.900')}
-    >
+    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <Flex minH="100vh">
-        <Box bg="blue">
+        <Box position="fixed" height="100vh" zIndex={99} bg="blue">
           <Sidebar
             onClose={onClose}
             width={{ base: '240px', md: sidebarWidth }}
@@ -49,17 +47,43 @@ export default function Layout() {
             </DrawerContent>
           </Drawer>
         </Box>
-        <Box width="100%" pl={30} bg="red">
-          <Box ml={contentMarginLeft} pos="relative" transition=".4s ease">
+        <Box
+          transition=".4s ease"
+          width="100%"
+          pl={{ md: 30, base: 0 }}
+          pr={{ md: 10, base: 0 }}
+          pt={{ md: 7, base: 0 }}
+          ml={{ md: !isMenuCollapsed ? '240px' : '80px', base: '0' }}
+          bg="gray.100"
+          pos="relative"
+        >
+          <Flex
+            zIndex={98}
+            borderRadius={6}
+            as="header"
+            position="sticky"
+            backgroundColor="rgba(255, 
+   255, 255, 0.8)"
+            justifyContent="flex-end"
+            right={0}
+            top={0}
+            backdropFilter="saturate(180%) blur(5px)"
+            w="100%"
+            width="100%"
+            shadow="lg"
+            transition=".4s ease"
+          >
             <Navbar onOpen={onOpen} />
-          </Box>
-          <Box ml={contentMarginLeft} transition=".4s ease">
+          </Flex>
+          <Box mt={20} transition=".4s ease">
             <Flex
-              px={4}
+              p={4}
               alignItems="center"
+              shadow="lg"
               bg={useColorModeValue('white', 'gray.900')}
               borderBottomWidth="1px"
               display="flex"
+              borderRadius={6}
               justifyContent="center"
               align="center"
               borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
@@ -67,15 +91,20 @@ export default function Layout() {
               <Outlet />
             </Flex>
           </Box>
-          <Box ml={contentMarginLeft} transition=".4s ease">
+          <Box my={6} transition=".4s ease">
             <Flex
-              px={4}
+              p={4}
+              shadow="lg"
               alignItems="center"
+              borderRadius={6}
               bg={useColorModeValue('white', 'gray.900')}
               borderBottomWidth="1px"
               borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
             >
-              Footer
+              Footer Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Porro, ipsum illo! Sapiente neque officia non vero mollitia
+              quibusdam delectus voluptatibus inventore ex saepe, consequatur
+              natus dolor dolore voluptate totam modi!
             </Flex>
           </Box>
         </Box>

@@ -23,11 +23,8 @@ function Navbar({ onOpen, ...rest }: NavbarProps) {
   return (
     <Flex
       px={{ base: 4, md: 4 }}
-      height="20"
+      py={1}
       alignItems="center"
-      bg={useColorModeValue('white', 'gray.900')}
-      borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}
     >
@@ -48,7 +45,7 @@ function Navbar({ onOpen, ...rest }: NavbarProps) {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton size="lg" aria-label="open menu" icon={<FiBell />} />
+        <IconButton size="md" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems="center">
           <Menu>
             <MenuButton

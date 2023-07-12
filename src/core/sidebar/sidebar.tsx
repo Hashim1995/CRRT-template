@@ -54,6 +54,7 @@ function Sidebar({ onClose, isOpen, ...rest }: SidebarProps) {
     <Box
       transition=".4s ease"
       bg={useColorModeValue('white', 'gray.900')}
+      shadow="lg"
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: '100%', md: isMenuCollapsed ? '80px' : '240px' }}
